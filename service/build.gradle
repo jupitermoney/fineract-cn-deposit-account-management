@@ -17,7 +17,7 @@
 
 buildscript {
     ext {
-        springBootVersion = '1.4.1.RELEASE'
+        springBootVersion = '2.2.1.RELEASE'
     }
 
     repositories {
@@ -29,7 +29,8 @@ plugins {
     id "com.github.hierynomus.license" version "0.13.1"
     id("org.nosphere.apache.rat") version "0.5.2"
     id "com.jfrog.artifactory" version "4.9.5"
-    id "org.springframework.boot" version "1.4.3.RELEASE"
+    id "org.springframework.boot" version "2.2.1.RELEASE"
+    id "io.spring.dependency-management" version "1.0.8.RELEASE"
     id 'maven-publish'
     id 'java'
     id 'idea'
@@ -38,7 +39,7 @@ plugins {
 apply from: '../shared.gradle'
 apply plugin: 'project-report'
 
-bootRepackage {
+bootJar {
     enabled = true
     classifier = 'boot'
 }
@@ -61,13 +62,13 @@ dependencies {
             [group: 'org.apache.fineract.cn.rhythm', name: 'api', version: versions.frameworkrhythm],
             [group: 'org.hibernate', name: 'hibernate-validator', version: versions.validator],
             [group: 'org.threeten', name: 'threeten-extra', version: '1.2'],
-            [group: 'io.netty', name: 'netty-all', version: '4.1.39.Final'],
-            [group: 'io.netty', name: 'netty-transport-native-epoll', version: '4.1.39.Final']
+            [group: 'io.netty', name: 'netty-all', version: '4.1.43.Final'],
+            [group: 'io.netty', name: 'netty-transport-native-epoll', version: '4.1.43.Final']
     )
 }
 
 tasks.withType(PublishToMavenLocal) { task ->
-    task.dependsOn 'bootRepackage'
+    task.dependsOn 'bootJar'
 }
 
 publishing {
@@ -80,7 +81,7 @@ publishing {
         }
         bootService(MavenPublication) {
             // "boot" jar
-            artifact(file("$buildDir/libs/$project.name-$project.version-${bootRepackage.classifier}.jar"))
+            artifact(file("$buildDir/libs/$project.name-$project.version-${bootJar.classifier}.jar"))
             groupId project.group
             artifactId("$project.name-boot")
             version project.findProperty('externalVersion') ?: project.version
