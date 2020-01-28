@@ -79,7 +79,7 @@ public class ProductInstanceAggregate {
 
     final Optional<ProductInstanceEntity> optionalProductInstance =
             this.productInstanceRepository.findByAccountIdentifier(productInstance.getAccountIdentifier());
-    if(optionalProductInstance.get().getJupiterAccountNumber().equalsIgnoreCase(productInstance.getJupiterAccountNumber())){
+    if(optionalProductInstance.isPresent() && optionalProductInstance.get().getJupiterAccountNumber().equalsIgnoreCase(productInstance.getJupiterAccountNumber())){
         this.logger.info("product instance already exists with jupiter a/c id {}", productInstance.getJupiterAccountNumber());
         return null;
     }
