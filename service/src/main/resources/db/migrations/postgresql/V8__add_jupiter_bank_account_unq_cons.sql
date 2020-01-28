@@ -18,4 +18,4 @@
 --
 
 ALTER TABLE shed_product_instances ADD CONSTRAINT jupiter_account_number_unq UNIQUE (jupiter_account_number);
-ALTER TABLE shed_product_instances ALTER COLUMN jupiter_account_number VARCHAR(256) NOT NULL;
+ALTER TABLE shed_product_instances ALTER COLUMN jupiter_account_number DROP NOT NULL;
