@@ -28,9 +28,11 @@ import org.apache.fineract.cn.deposit.service.internal.command.CloseProductInsta
 import org.apache.fineract.cn.deposit.service.internal.command.CreateProductInstanceCommand;
 import org.apache.fineract.cn.deposit.service.internal.command.TransactionProcessedCommand;
 import org.apache.fineract.cn.deposit.service.internal.command.UpdateProductInstanceCommand;
+import org.apache.fineract.cn.deposit.service.internal.repository.ProductInstanceEntity;
 import org.apache.fineract.cn.deposit.service.internal.service.ProductInstanceService;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import javax.validation.Valid;
 import org.apache.fineract.cn.anubis.annotation.AcceptedTokenType;
@@ -77,6 +79,11 @@ public class ProductInstanceRestController {
   )
   @ResponseBody
   public ResponseEntity<Void> create(@RequestBody @Valid final ProductInstance productInstance) {
+    final Optional<ProductInstance> optionalProductInstance =
+            this.productInstanceService.findByJupiterAccountIdentifier(productInstance.getJupiterAccountNumber());
+    if(optionalProductInstance.isPresent()){
+      throw ServiceException.conflict("Product instance {0} already exists for Jupiter account number {1}", optionalProductInstance.get().getJupiterAccountNumber(), optionalProductInstance.get().getAccountIdentifier());
+    }
     this.commandGateway.process(new CreateProductInstanceCommand(productInstance));
     return ResponseEntity.accepted().build();
   }
