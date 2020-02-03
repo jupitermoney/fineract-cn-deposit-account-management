@@ -124,7 +124,9 @@ public interface DepositAccountManager {
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE
   )
-  @ThrowsException(status = HttpStatus.CONFLICT, exception = ProductInstanceAlreadyExistsExceptions.class)
+  @ThrowsExceptions({
+          @ThrowsException( status = HttpStatus.CONFLICT, exception = ProductInstanceAlreadyExistsExceptions.class)
+  })
   void create(@RequestBody @Valid final ProductInstance productInstance);
 
   @RequestMapping(
