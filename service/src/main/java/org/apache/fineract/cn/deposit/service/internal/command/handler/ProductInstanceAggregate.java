@@ -77,13 +77,6 @@ public class ProductInstanceAggregate {
   public String createProductInstance(final CreateProductInstanceCommand createProductInstanceCommand) {
     final ProductInstance productInstance = createProductInstanceCommand.productInstance();
 
-    final Optional<ProductInstanceEntity> optionalProductInstance =
-            this.productInstanceRepository.findByJupiterAccountNumber(productInstance.getJupiterAccountNumber());
-    if(optionalProductInstance.isPresent()){
-        this.logger.info("product instance already exists with jupiter a/c id {}", productInstance.getJupiterAccountNumber());
-        return null;
-    }
-
     final ProductInstanceEntity productInstanceEntity =
         ProductInstanceMapper.map(productInstance, this.productDefinitionRepository);
 
