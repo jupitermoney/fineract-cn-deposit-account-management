@@ -70,6 +70,27 @@ public class ProductInstanceEntity {
   @Column(name = "last_modified_on", nullable = false)
   private LocalDateTime lastModifiedOn;
 
+  @Column(name = "jupiter_account_number", nullable = false)
+  private String jupiterAccountNumber;
+  @Column(name = "ifsc_code", nullable = false)
+  private String ifscCode;
+
+  public String getJupiterAccountNumber() {
+    return jupiterAccountNumber;
+  }
+
+  public void setJupiterAccountNumber(String jupiterAccountNumber) {
+    this.jupiterAccountNumber = jupiterAccountNumber;
+  }
+
+  public String getIfscCode() {
+    return ifscCode;
+  }
+
+  public void setIfscCode(String ifscCode) {
+    this.ifscCode = ifscCode;
+  }
+
   public ProductInstanceEntity() {
     super();
   }

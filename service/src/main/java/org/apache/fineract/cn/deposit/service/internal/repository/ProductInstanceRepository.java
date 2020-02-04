@@ -30,4 +30,6 @@ public interface ProductInstanceRepository extends JpaRepository<ProductInstance
   List<ProductInstanceEntity> findByProductDefinition(final ProductDefinitionEntity productDefinitionEntity);
 
   Optional<ProductInstanceEntity> findByAccountIdentifier(final String identifier);
+
+  Optional<ProductInstanceEntity> findByJupiterAccountNumber(final String identifier);
 }

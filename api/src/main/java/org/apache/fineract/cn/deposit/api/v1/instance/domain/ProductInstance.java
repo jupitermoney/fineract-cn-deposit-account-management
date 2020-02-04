@@ -35,6 +35,25 @@ public class ProductInstance {
   private String lastTransactionDate;
   private String state;
   private Double balance;
+  @ValidIdentifier(maxLength = 256, optional = false)
+  private String jupiterAccountNumber;
+  private String ifscCode;
+
+  public String getJupiterAccountNumber() {
+    return jupiterAccountNumber;
+  }
+
+  public void setJupiterAccountNumber(String jupiterAccountNumber) {
+    this.jupiterAccountNumber = jupiterAccountNumber;
+  }
+
+  public String getIfscCode() {
+    return ifscCode;
+  }
+
+  public void setIfscCode(String ifscCode) {
+    this.ifscCode = ifscCode;
+  }
 
   public ProductInstance() {
     super();

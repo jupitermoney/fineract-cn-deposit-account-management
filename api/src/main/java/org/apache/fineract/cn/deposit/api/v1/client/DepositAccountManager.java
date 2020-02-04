@@ -18,10 +18,7 @@
  */
 package org.apache.fineract.cn.deposit.api.v1.client;
 
-import org.apache.fineract.cn.deposit.api.v1.definition.ActionAlreadyExistsException;
-import org.apache.fineract.cn.deposit.api.v1.definition.ProductDefinitionAlreadyExistsException;
-import org.apache.fineract.cn.deposit.api.v1.definition.ProductDefinitionNotFoundException;
-import org.apache.fineract.cn.deposit.api.v1.definition.ProductDefinitionValidationException;
+import org.apache.fineract.cn.deposit.api.v1.definition.*;
 import org.apache.fineract.cn.deposit.api.v1.definition.domain.Action;
 import org.apache.fineract.cn.deposit.api.v1.definition.domain.DividendDistribution;
 import org.apache.fineract.cn.deposit.api.v1.definition.domain.ProductDefinition;
@@ -127,6 +124,9 @@ public interface DepositAccountManager {
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE
   )
+  @ThrowsExceptions({
+          @ThrowsException( status = HttpStatus.CONFLICT, exception = ProductInstanceAlreadyExistsExceptions.class)
+  })
   void create(@RequestBody @Valid final ProductInstance productInstance);
 
   @RequestMapping(

@@ -46,6 +46,8 @@ public class ProductInstanceMapper {
       productInstanceEntity.setAccountIdentifier(productInstance.getAccountIdentifier());
       productInstanceEntity.setState(productInstance.getState());
       productInstanceEntity.setProductDefinition(optionalProductDefinitionEntity.get());
+      productInstanceEntity.setJupiterAccountNumber(productInstance.getJupiterAccountNumber());
+      productInstanceEntity.setIfscCode(productInstance.getIfscCode());
 
       if (productInstance.getBeneficiaries() != null) {
         productInstanceEntity.setBeneficiaries(
@@ -79,6 +81,8 @@ public class ProductInstanceMapper {
     productInstance.setAccountIdentifier(productInstanceEntity.getAccountIdentifier());
     productInstance.setProductIdentifier(productInstanceEntity.getProductDefinition().getIdentifier());
     productInstance.setState(productInstanceEntity.getState());
+    productInstance.setJupiterAccountNumber(productInstanceEntity.getJupiterAccountNumber());
+    productInstance.setIfscCode(productInstanceEntity.getIfscCode());
 
     if (productInstanceEntity.getBeneficiaries() != null) {
       productInstance.setBeneficiaries(new HashSet<>(

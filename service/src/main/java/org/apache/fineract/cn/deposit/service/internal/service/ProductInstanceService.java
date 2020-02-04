@@ -85,4 +85,11 @@ public class ProductInstanceService {
       return ProductInstanceMapper.map(productInstanceEntity, account);
     });
   }
+
+  public Optional<ProductInstance> findByJupiterAccountIdentifier(final String identifier) {
+    return this.productInstanceRepository.findByJupiterAccountNumber(identifier).map(productInstanceEntity -> {
+      final Account account = this.accountingService.findAccount(productInstanceEntity.getAccountIdentifier());
+      return ProductInstanceMapper.map(productInstanceEntity, account);
+    });
+  }
 }
