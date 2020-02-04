@@ -82,7 +82,7 @@ public class ProductInstanceRestController {
     final Optional<ProductInstance> optionalProductInstance =
             this.productInstanceService.findByJupiterAccountIdentifier(productInstance.getJupiterAccountNumber());
     if(optionalProductInstance.isPresent()){
-      throw ServiceException.conflict("Product instance {0} already exists for Jupiter account number {1}", optionalProductInstance.get().getJupiterAccountNumber(), optionalProductInstance.get().getAccountIdentifier());
+      throw ServiceException.conflict("Product instance with account number {0} already exists for Jupiter account number {1}", optionalProductInstance.get().getAccountIdentifier(), optionalProductInstance.get().getJupiterAccountNumber());
     }
     this.commandGateway.process(new CreateProductInstanceCommand(productInstance));
     return ResponseEntity.accepted().build();
