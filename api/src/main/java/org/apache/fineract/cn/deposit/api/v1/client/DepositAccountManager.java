@@ -208,7 +208,7 @@ public interface DepositAccountManager {
 
 
   @RequestMapping(
-          value = "accountId/instances/{identifier}",
+          value = "instances/accounts/{identifier}",
           method = RequestMethod.GET,
           consumes = MediaType.APPLICATION_JSON_VALUE,
           produces = MediaType.ALL_VALUE

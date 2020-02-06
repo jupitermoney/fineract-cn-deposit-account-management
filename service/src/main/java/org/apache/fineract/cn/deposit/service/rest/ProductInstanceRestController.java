@@ -209,7 +209,7 @@ public class ProductInstanceRestController {
 
   @Permittable(value = AcceptedTokenType.TENANT, groupId = PermittableGroupIds.INSTANCE_MANAGEMENT)
   @RequestMapping(
-          value = "accountId/{identifier}",
+          value = "accounts/{identifier}",
           method = RequestMethod.GET,
           consumes = MediaType.ALL_VALUE,
           produces = MediaType.APPLICATION_JSON_VALUE
