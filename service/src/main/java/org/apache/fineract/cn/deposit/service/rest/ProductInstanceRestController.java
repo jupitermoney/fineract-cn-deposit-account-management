@@ -195,15 +195,29 @@ public class ProductInstanceRestController {
 
   @Permittable(value = AcceptedTokenType.TENANT, groupId = PermittableGroupIds.INSTANCE_MANAGEMENT)
   @RequestMapping(
-      value = "/{identifier}",
-      method = RequestMethod.GET,
-      consumes = MediaType.ALL_VALUE,
-      produces = MediaType.APPLICATION_JSON_VALUE
+          value = "/{identifier}",
+          method = RequestMethod.GET,
+          consumes = MediaType.ALL_VALUE,
+          produces = MediaType.APPLICATION_JSON_VALUE
   )
   @ResponseBody
   ResponseEntity<ProductInstance> find(@PathVariable("identifier") final String identifier) {
     return ResponseEntity.ok(this.productInstanceService.findByAccountIdentifier(identifier)
-        .orElseThrow(() -> ServiceException.notFound("Product instance {0} not found.", identifier))
+            .orElseThrow(() -> ServiceException.notFound("Product instance {0} not found.", identifier))
+    );
+  }
+
+  @Permittable(value = AcceptedTokenType.TENANT, groupId = PermittableGroupIds.INSTANCE_MANAGEMENT)
+  @RequestMapping(
+          value = "accounts/{identifier}",
+          method = RequestMethod.GET,
+          consumes = MediaType.ALL_VALUE,
+          produces = MediaType.APPLICATION_JSON_VALUE
+  )
+  @ResponseBody
+  ResponseEntity<ProductInstance> findByJupiterAccountId(@PathVariable("identifier") final String identifier) {
+    return ResponseEntity.ok(this.productInstanceService.findByJupiterAccountIdentifier(identifier)
+            .orElseThrow(() -> ServiceException.notFound("Product instance {0} not found.", identifier))
     );
   }
 }

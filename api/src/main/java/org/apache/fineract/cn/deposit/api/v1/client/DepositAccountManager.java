@@ -206,6 +206,18 @@ public interface DepositAccountManager {
   })
   ProductInstance findProductInstance(@PathVariable("identifier") final String identifier);
 
+
+  @RequestMapping(
+          value = "instances/accounts/{identifier}",
+          method = RequestMethod.GET,
+          consumes = MediaType.APPLICATION_JSON_VALUE,
+          produces = MediaType.ALL_VALUE
+  )
+  @ThrowsExceptions({
+          @ThrowsException(status = HttpStatus.NOT_FOUND, exception = ProductInstanceNotFoundException.class)
+  })
+  ProductInstance findProductInstanceByJupiterAccountId(@PathVariable("identifier") final String identifier);
+
   @RequestMapping(
       value = "/definitions/{identifier}/dividends",
       method = RequestMethod.POST,
